@@ -27,10 +27,10 @@ const getGreetings = () => {
 }
 getGreetings()
 
-const getWeekDay = () => {
+const getWeekDay = (day) => {
 
-    const week = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
-    let day = date.getDay();
+    const week = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+    day = date.getDay();
 
     today.innerHTML = '<span id="total">' + week[day] + '</span>';
 
@@ -38,7 +38,7 @@ const getWeekDay = () => {
 getWeekDay()
 
 const getCurrentTime = () => {
-    let hours = date.toLocaleTimeString('en');
+    const hours = date.toLocaleTimeString('en');
 
     currentTime.innerHTML = '<span id="total">' + hours + '</span>';
 }
@@ -46,8 +46,8 @@ getCurrentTime()
 
 const getDaysNewYear = () => {
     date = new Date('31 december 2024');
-    let dateNow = new Date().getTime(); //миллисекунды до текущего времени на ПК
-    let timeRemaining = (date - dateNow) / 1000; //осталось до НГ в сек
+    const dateNow = new Date().getTime(); //миллисекунды до текущего времени на ПК
+    const timeRemaining = (date - dateNow) / 1000; //осталось до НГ в сек
     let daysLeft = Math.floor(timeRemaining / 60 / 60 / 24);
 
     function getNoun(number, one, two, five) { //верное окончание сущ-ного
