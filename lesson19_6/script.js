@@ -8,9 +8,7 @@ const daysNewYear = document.getElementById('total-days');
 let date = new Date();
 
 const getGreetings = () => {
-
-    const greetings = ['Доброй ночи!', 'Доброе утро!', 'Добрый день!', 'Добрый вечер!']
-
+    const greetings = ['Доброй ночи!', 'Доброе утро!', 'Добрый день!', 'Добрый вечер!'];
     let hours = date.getHours();
 
     if (hours > 23 || hours < 6) {
@@ -22,27 +20,21 @@ const getGreetings = () => {
     } else {
         hours = 3
     }
-
     hello.innerHTML = "<p>" + greetings[hours] + "</p>"
 }
-getGreetings()
 
-const getWeekDay = (day) => {
-
+const getWeekDay = () => {
     const week = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
-    day = date.getDay();
+    const day = date.getDay();
 
     today.innerHTML = '<span id="total">' + week[day] + '</span>';
-
 }
-getWeekDay()
 
 const getCurrentTime = () => {
     const hours = date.toLocaleTimeString('en');
 
     currentTime.innerHTML = '<span id="total">' + hours + '</span>';
 }
-getCurrentTime()
 
 const getDaysNewYear = () => {
     date = new Date('31 december 2024');
@@ -65,7 +57,10 @@ const getDaysNewYear = () => {
         }
         return five;
     }
-
     daysNewYear.innerHTML = '<span id="totaldays">' + daysLeft + getNoun(daysLeft, ' день', ' дня', ' дней') + '</span>';
 }
+
+getGreetings()
+getWeekDay()
+getCurrentTime()
 getDaysNewYear()
