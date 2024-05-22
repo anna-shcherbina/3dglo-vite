@@ -18,11 +18,9 @@ export const modalFunc = () => {
 
         if (window.screen.width > 768) {
             disappearanceModal()
-        };
-
-        setTimeout(() => {
-            modal.style.display = 'none' //разблокируй экран через...
-        }, 500);
+        } else {
+            modal.style.display = 'none' //разблокируй экран
+        }
     });
 
     const appearanceModal = () => { //функция анимир.появления окна
@@ -47,6 +45,7 @@ export const modalFunc = () => {
 
             if (modal.style.opacity <= 0) {
                 clearInterval(idInterval);
+                modal.style.display = 'none'
             }
         }, 50);
     };
