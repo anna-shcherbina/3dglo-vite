@@ -1,7 +1,6 @@
 export const modalFunc = () => {
-    const modal = document.querySelector('.popup')
+    const modal = document.querySelector('.popup') //блок, где лежит модальное окно
     const buttons = document.querySelectorAll('.popup-btn')
-    const closeBtn = modal.querySelector('.popup-close')
 
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -12,15 +11,6 @@ export const modalFunc = () => {
                 appearanceModal() //то запускай анимацию
             };
         })
-    });
-
-    closeBtn.addEventListener('click', () => {
-
-        if (window.screen.width > 768) {
-            disappearanceModal()
-        } else {
-            modal.style.display = 'none' //разблокируй экран
-        }
     });
 
     const appearanceModal = () => { //функция анимир.появления окна
@@ -49,5 +39,19 @@ export const modalFunc = () => {
             }
         }, 50);
     };
+
+    modal.addEventListener('click', (e) => { //что ты кликнул на блоке, где модал.окно?
+        if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
+            //если при клике мы получим null, т.е. кликнули элемент НЕ с классом модал.окна ИЛИ есть класс кнопки-крестика
+            //console.log('мимо');
+            if (window.screen.width > 768) {
+                disappearanceModal()
+            } else {
+                modal.style.display = 'none' //разблокируй экран (закрой модал.окно)
+            }
+        }
+    })
+
+
 
 }
