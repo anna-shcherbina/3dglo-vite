@@ -43,7 +43,7 @@ export const modalFunc = () => {
     modal.addEventListener('click', (e) => { //что ты кликнул на блоке, где модал.окно?
         if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
             //если при клике мы получим null, т.е. кликнули элемент НЕ с классом модал.окна ИЛИ есть класс кнопки-крестика
-            //console.log('мимо');
+
             if (window.screen.width > 768) {
                 disappearanceModal()
             } else {
@@ -51,7 +51,4 @@ export const modalFunc = () => {
             }
         }
     })
-
-
-
 }
