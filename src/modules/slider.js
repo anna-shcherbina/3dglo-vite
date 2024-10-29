@@ -1,10 +1,26 @@
 export const sliderFunc = () => {
     const sliderBlock = document.querySelector('.portfolio-content') //список <ul> - слайдер
-    const slides = document.querySelectorAll('.portfolio-item') // слайды
-    const dots = document.querySelectorAll('.dot') // точки внизу слайдера
+    const slides = document.querySelectorAll('.portfolio-item') // слайды  
+    const portfolioDots = document.querySelector('.portfolio-dots') //блок/список <ul> для точек в слайдере
+    let dots = document.querySelectorAll('.dot') // коллекция точек внизу слайдера  
+
     const timeInterval = 2000
     let currentSlide = 0
     let interval
+
+    const getDots = () => { // функция добавляет точки на слайдер по кол-ву слайдов
+
+        slides.forEach((slide, index) => { // перебирай слайды, получая индекс
+            const newLi = document.createElement('li');// создай новый эл-т списка            
+            if (index === currentSlide) {// если индекс равен индексу активного на дан.момент слайда
+                newLi.className = 'dot dot-active';// то даём эл-ту класс dot-active (станет синим цветом)                
+            } else { //всем остальным
+                newLi.className = 'dot';// вставляем класс dot (просто белая точка)                
+            }
+            portfolioDots.append(newLi); //добавим в блок, где находятся точки, новый элемент списка
+            dots = document.querySelectorAll('.dot') // получили заново коллекцию 
+        });
+    }
 
     const prevSlide = (elems, index, strClass) => {
         elems[index].classList.remove(strClass)
@@ -82,4 +98,6 @@ export const sliderFunc = () => {
     }, true)
 
     startSlide(timeInterval)
+    getDots()
+
 }
