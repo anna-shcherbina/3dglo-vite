@@ -11,6 +11,6 @@ import { sliderFunc } from './src/modules/slider'
 timer('31 december 2024')
 menuFunc()
 modalFunc()
-calcFunc()
+calcFunc(100)
 tabsFunc()
 sliderFunc()
