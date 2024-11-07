@@ -76,5 +76,4 @@ export const calcFunc = (price = 100) => {
             e.target.value = e.target.value.replace(/[^a-zA-Z0-9\@\s\-\_\.\!\~\*\']+$/g, "");
         });
     });
-
 }
