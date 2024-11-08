@@ -31,7 +31,7 @@ export const calcFunc = (price = 100) => {
         } // в любом другом случае: let calcDayValue = 1
 
         if (calcType.value && calcSquare.value) {//только в случае заполненных полей (value существуют/не 0/не undefiend) мы должны делать расчёт итога
-            totalValue = price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue //см.общую формулу в таблице (столбец С, строка 6)
+            totalValue = Math.round(price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue) //см.общую формулу в таблице (столбец С, строка 6)
         } else {
             totalValue = 0
         }
