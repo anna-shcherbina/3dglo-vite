@@ -1,44 +1,22 @@
+import { animate } from './helpers'
+
 export const modalFunc = () => {
     const modal = document.querySelector('.popup') //блок, где лежит модальное окно
     const buttons = document.querySelectorAll('.popup-btn')
+
+    let valueOpacity = modal.style.opacity;
 
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
 
             modal.style.display = 'block' //заблокировали экран
+            modal.style.opacity = 1 //сделай окно сразу ярким
 
             if (window.screen.width > 768) { //если ширина экрана устройства больше...,
                 appearanceModal() //то запускай анимацию
             };
         })
     });
-
-    const appearanceModal = () => { //функция анимир.появления окна
-
-        modal.style.opacity = 0; //Устанавливаем начальное значение прозрачности элемента
-
-        let idInterval = setInterval(() => {
-
-            modal.style.opacity = parseFloat(modal.style.opacity) + 0.1; //увеличивай прозрачность на 0,1
-
-            if (modal.style.opacity >= 1) { //если прозрачность 1, 
-                clearInterval(idInterval); //то очисти идентификатор/остановка анимации
-            }
-
-        }, 50); //увеличивай прозрачность каждые ...мсек        
-    };
-
-    const disappearanceModal = () => { //функция анимир.исчезновения окна
-
-        let idInterval = setInterval(() => {
-            modal.style.opacity = parseFloat(modal.style.opacity) - 0.1;
-
-            if (modal.style.opacity <= 0) {
-                clearInterval(idInterval);
-                modal.style.display = 'none'
-            }
-        }, 50);
-    };
 
     modal.addEventListener('click', (e) => { //что ты кликнул на блоке, где модал.окно?
         if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
@@ -48,7 +26,35 @@ export const modalFunc = () => {
                 disappearanceModal()
             } else {
                 modal.style.display = 'none' //разблокируй экран (закрой модал.окно)
-            }
-        }
+            };
+        };
     })
+
+    const appearanceModal = () => { //функция анимир.появления окна
+        animate({
+            duration: 2000, //длительность появления окна
+            timing(timeFraction) {
+                return timeFraction; //никак не изменяем саму скорость анимации
+            },
+            draw(progress) {
+                modal.style.opacity = valueOpacity + progress; //прозрачность изменяется от 0 до 1
+            }
+        });
+    };
+
+    const disappearanceModal = () => { //функция анимир.исчезновения окна
+        animate({
+            duration: 2000, //длительность появления окна
+            timing(timeFraction) {
+                return timeFraction; //никак не изменяем саму скорость анимации
+            },
+            draw(progress) {
+                modal.style.opacity = valueOpacity + 1 - progress; // прозрачность от 1 до 0 
+
+                if (modal.style.opacity <= 0) { //когда окно стало прозрачным,
+                    modal.style.display = 'none' //закрой его
+                };
+            }
+        });
+    };
 }
