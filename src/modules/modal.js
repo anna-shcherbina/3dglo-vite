@@ -6,6 +6,34 @@ export const modalFunc = () => {
 
     let valueOpacity = modal.style.opacity;
 
+    const appearanceModal = () => { //функция анимир.появления окна
+        animate({
+            duration: 1000,
+            timing(timeFraction) {
+                return Math.pow(timeFraction, 5) //увеличиваем саму скорость анимации
+            },
+            draw(progress) {
+                modal.style.opacity = valueOpacity + progress; //прозрачность изменяется от 0 до 1
+            },
+        });
+    };
+
+    const disappearanceModal = () => { //функция анимир.исчезновения окна
+        animate({
+            duration: 1000,
+            timing(timeFraction) {
+                return Math.pow(timeFraction, 5) //увеличиваем саму скорость анимации
+            },
+            draw(progress) {
+                modal.style.opacity = valueOpacity + 1 - progress; // прозрачность от 1 до 0 
+
+                if (modal.style.opacity <= 0) { //когда окно стало прозрачным,
+                    modal.style.display = 'none' //закрой его
+                };
+            },
+        });
+    };
+
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
 
@@ -28,33 +56,5 @@ export const modalFunc = () => {
                 modal.style.display = 'none' //разблокируй экран (закрой модал.окно)
             };
         };
-    })
-
-    const appearanceModal = () => { //функция анимир.появления окна
-        animate({
-            duration: 2000, //длительность появления окна
-            timing(timeFraction) {
-                return timeFraction; //никак не изменяем саму скорость анимации
-            },
-            draw(progress) {
-                modal.style.opacity = valueOpacity + progress; //прозрачность изменяется от 0 до 1
-            }
-        });
-    };
-
-    const disappearanceModal = () => { //функция анимир.исчезновения окна
-        animate({
-            duration: 2000, //длительность появления окна
-            timing(timeFraction) {
-                return timeFraction; //никак не изменяем саму скорость анимации
-            },
-            draw(progress) {
-                modal.style.opacity = valueOpacity + 1 - progress; // прозрачность от 1 до 0 
-
-                if (modal.style.opacity <= 0) { //когда окно стало прозрачным,
-                    modal.style.display = 'none' //закрой его
-                };
-            }
-        });
-    };
+    });
 }
